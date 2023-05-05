@@ -1,0 +1,11 @@
+{
+  "mixinConfigs": [
+    "weaveyoutube.mixins.json"
+  ],
+  "entrypoints": [
+    "net.minecraft.client.club.maxstats.weaveyoutube.Main"
+  ],
+  "hooks": [
+    "net.minecraft.client.club.maxstats.weaveyoutube.hook.StartGameHook"
+  ]
+}

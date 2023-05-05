@@ -1,0 +1,189 @@
+// Class from SMok Client by SleepyFish
+// Useless file ? yes very useless
+
+Dont share this File with anyone.     (21/04/2023)
+This file was written by SleepyFish   (with hands)
+
+-------------------------------------
+
+Amari.class = SmokMoKKOK
+amari.name = SMOKOKoKOKK
+amari.version = SmoKOKoKKkK
+amari.discord = MOKSOKOSOSO
+amari.lunarTitle = SmokKOkOKOKKSK
+amari.init = SMokMoOKOK
+amari.startCheck = SmOkMKOKKKOK
+amari.resetTitle = KSkKMmOOSSK
+amari.getName = SmKO
+amari.getVersion = SmKo
+
+-------------------------------------
+
+Module.class = smokK
+module.onEnable = kmos
+module.onDisable = kmso
+module.onEnableEvent = smok
+module.onDisableEvent = skmo
+module.addSetting = smko
+module.name = skmko
+module.category = smmko
+module.description = skkomo
+module.keycode = kmoso
+module.toggled = kkmos
+module.hidden = kmso
+module.settings = ksmo
+module.defaultToggled = osmk
+module.defaultKeycode = sokm
+module.mc = var1
+
+-------------------------------------
+
+ConfigManager.class = skKmok
+configManager.configDirectory = mosk
+configManager.configs = koMs
+configManager.extension = OmkS
+configManager.defFile = SmKO
+configManager.config = smOK
+configManager.getConfigDirectory = SkOm
+configManager.isOutdated = forSmok
+configManager.discoverConfigs = isMosk
+configManager.getConfig = setKSMO
+configManager.save = smokO
+configManager.setConfig = msok
+configManager.loadConfigByName = mOkS
+configManager.getConfigs = mKsS
+configManager.copyConfig = mSsK
+configManager.resetConfig = SMkO
+configManager.deleteConfig = MskO
+configManager.setConfigByURL = SMKO
+
+-------------------------------------
+
+ModuleManager.class = smokK.smoKk
+moduleManager.mods = moks
+moduleManager.count = msks
+moduleManager.addMod = v
+moduleManager.getModules = ismsok
+moduleManager.getModByClass = setMoks
+moduleManager.getModulesInCategory = isMoks
+
+-------------------------------------
+
+GuiManager.class = ksoKm
+guiManager.clickGui = MoKs
+guiManager.getClickGui = smKO
+
+-------------------------------------
+
+ClientConfig.class = kKmos
+clientConfig.cfgFile = sokm
+clientConfig.clientCfgName = sOkm
+clientConfig.clickGuiPosPrefix = SmkO
+clientConfig.loadedConfigPrefix = KsOM
+clientConfig.saveConfig = forMoKS
+clientConfig.applyConfig = KmOsSS
+clientConfig.parseCfgFile = sOmk
+clientConfig.loadClickGuiSettings = sKmo
+clientConfig.getClickGuiSettings = KSom
+
+-------------------------------------
+
+ColorManager.class = moKsS
+colorManager.colors = mOOKS
+colorManager.clientColor = sMOK
+colorManager.checkGuiMod = mosk
+colorManager.getCurrentAccentColor = mOks
+colorManager.setCurrentAccentColor = mosk
+colorManager.getColors = skom
+colorManager.getAccentColorByName = msok
+
+-------------------------------------
+
+EventManager.class = kSmko
+eventManager.REGISTRY_MAP = SMSKO
+eventManager.register = sMok
+eventManager.unregister = Smok
+eventManager.cleanMap = msok
+eventManager.sortListValue = mosk
+eventManager.isMethodBad = smOk
+eventManager.get = mOKS
+
+-------------------------------------
+
+RotationManager.class = KKmos
+rotationManager.rotating = SmOK
+rotationManager.yaw = sMOk
+rotationManager.pitch = SmoK
+rotationManager.onGroung = sMoK
+rotationManager.getYaw = getSokm
+rotationManager.getPitch = getSmOOK
+rotationManager.isOnGround = getOkms
+rotationManager.isRotating = getMOSK
+
+-------------------------------------
+
+DiscordUtils.class = MSMOKK
+
+-------------------------------------
+
+ClickGui.class = KOMS
+clickGui.categoryList = smoK
+clickGui.allowBlur = mKos
+clickGui.sf = Kmos
+clickGui.getCategoryList = SMkO
+
+-------------------------------------
+
+package gui.comp
+CategoryComp.class = SmSMOKKOK
+DescComp.class = KOKSSSMOK
+ModeComp.class = SKKkmMOKsk
+ModuleComp = MMOKskOSKKO
+SliderComp = SkkkKKOOm
+TickComp = MOkksksk
+impl.Comp.class = SsOKKkkM
+
+-------------------------------------
+
+package module.event
+ArrayHelper.class = SMoKKkoKK
+ArrayHelper.elements = smkokkk
+ArrayHelper.add = MoOOks
+ArrayHelper.contains = SmOOk
+ArrayHelper.remove = MoKKs
+ArrayHelper.array = SmsK
+ArrayHelper.size = SMkO
+ArrayHelper.set = OOmsK
+ArrayHelper.get = SkmmO
+ArrayHelper.isEmpty = MkOS
+
+Data.class = MokKKsKKS
+Data.source = SMOksOK
+Data.target = KOKOskOS
+Date.priority = MokskSK
+
+Event.class = SKokKSKKS
+Event.cancelled = SmKkkOK
+
+Priority.class = MoKKksksk
+Priority.FIRST = EIGHT
+Priority.FIRST = FIRST
+Priority.FIRST = SECOND
+Priority.FIRST = ZERO
+Priority.FIRST = FOURTH
+Priority.VALUE_ARRAY = KMsok
+
+SmokEvent.class = SmKKkOKKS
+
+-------------------------------------
+
+Setting.class = SMOskksmOM
+Setting.settingName = MSoKKKS
+Setting.resetToDefaults = SMoskksk
+Setting.getConfigAsJson = SMkkkOKSK
+Setting.getSettingType = MOkkskKS
+Setting.applyConfigFromJson = OmMOKKS
+Setting.isShown = MSOKkskSO
+Setting.getName = MOkskkS
+
+-------------------------------------
