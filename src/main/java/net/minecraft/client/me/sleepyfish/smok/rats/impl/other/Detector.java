@@ -60,9 +60,6 @@ public class Detector extends Rat {
         for (EntityPlayer target : mc.theWorld.playerEntities)
             if (target != mc.thePlayer)
                 if (!BotUtils.isBot(target)) {
-                    if (this.reachChecks(target))
-                        this.send(target, "reach");
-
                     if (this.gooberChecks(target))
                         this.send(target, "big goober");
 
