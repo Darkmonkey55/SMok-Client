@@ -1,0 +1,16 @@
+{
+  "compatibilityLevel": "JAVA_8",
+  "package": "net.minecraft.client.club.maxstats.weaveyoutube.mixin",
+  "mixins": [
+    "RendererLivingEntityMixin",
+    "custom.MixinEntityPlayerSP",
+    "custom.MixinEntityRenderer",
+    "custom.MixinGuiIngame",
+    "custom.MixinGuiScreen",
+    "custom.MixinItemRenderer",
+    "custom.MixinMinecraft",
+    "custom.MixinNetworkManager",
+    "custom.MixinRenderManager",
+    "custom.MixinWorldRenderer"
+  ]
+}
