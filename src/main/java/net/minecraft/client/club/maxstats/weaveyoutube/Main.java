@@ -9,7 +9,6 @@ import net.minecraft.client.me.sleepyfish.smok.utils.ClientUtils;
 import net.weavemc.loader.api.ModInitializer;
 import net.weavemc.loader.api.event.EventBus;
 import net.weavemc.loader.api.event.KeyboardEvent;
-import org.lwjgl.opengl.Display;
 
 // Class from SMok Client by SleepyFish
 public class Main implements ModInitializer {
@@ -21,7 +20,6 @@ public class Main implements ModInitializer {
         Smok.inst.saveAndSetTitle();
         Smok.inst.juue_tea_and_tha_bri_ischhh_init();
 
-        /*
         EventBus.subscribe(KeyboardEvent.class, e -> {
             if (!ClientUtils.inClickGui()) {
                 if (Smok.inst.mc.currentScreen == null && e.getKeyState()) {
@@ -38,7 +36,6 @@ public class Main implements ModInitializer {
         EventBus.subscribe(new RenderListener());
         EventBus.subscribe(new TickListener());
         EventBus.subscribe(new RenderGameOverlayListener());
-         */
     }
 
 }

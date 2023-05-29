@@ -14,6 +14,7 @@ import org.lwjgl.opengl.Display;
 // Class from SMok Client by SleepyFish
 public class Smok {
 
+    /** DevOfDeath can beat his wife because he has 8 million power in rise of kingdom **/
     public final static Smok inst = new Smok();
 
     public final boolean debugMode = false;

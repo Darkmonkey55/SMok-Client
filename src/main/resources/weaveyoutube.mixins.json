@@ -2,7 +2,7 @@
   "compatibilityLevel": "JAVA_8",
   "package": "net.minecraft.client.club.maxstats.weaveyoutube.mixin",
   "mixins": [
-    "RendererLivingEntityMixin",
+    "MixinRendererLivingEntity",
     "custom.MixinEntityPlayerSP",
     "custom.MixinGuiIngame",
     "custom.MixinGuiScreen",
