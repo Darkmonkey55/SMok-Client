@@ -18,24 +18,24 @@ import java.util.ArrayList;
 // Class from SMok Client by SleepyFish
 public class Rat {
 
-    private final String skkmo;
-    private final Category smmko;
-    private final String skmok;
+    private final String name;
+    private final Category category;
+    private final String description;
     private int bind;
 
     private boolean toggled;
     private boolean hiding;
 
-    private final ArrayList<SettingHelper> ksmo;
+    private final ArrayList<SettingHelper> settings;
 
     public Minecraft mc;
 
-    public Rat(String skmok, Category skkmo, String smmko) {
-        this.skkmo = smmko;
-        this.smmko = skkmo;
-        this.skmok = skmok;
+    public Rat(String name, Category category, String description) {
+        this.name = name;
+        this.category = category;
+        this.description = description;
 
-        this.ksmo = new ArrayList<>();
+        this.settings = new ArrayList<>();
 
         this.bind = 0;
         this.hiding = false;
@@ -46,22 +46,23 @@ public class Rat {
     }
 
     public void onEnable() {
-        if (!this.isHidden())
+        if (!this.isHidden()) {
             if (this.getCategory() == Category.Blatant)
-                if (!Gui.blatantMode.isToggled()) {
+                if (!Gui.blatantMode.isEnabled()) {
                     ClientUtils.notify("Error!", "Blatant Mode is not enabled", Notification.Icon.Warning, 3);
                     return;
                 }
+        }
 
         this.toggled = true;
         Smok.inst.eveManager.register(this);
         
         if (!this.isHidden()) {
             if (!this.getName().toLowerCase().endsWith("gui")) {
-                if (Gui.moduleSounds.isToggled())
+                if (Gui.moduleSounds.isEnabled())
                     SoundUtils.playSound(SoundUtils.click, 1F, 0.8F);
 
-                if (Gui.toggleNotify.isToggled())
+                if (Gui.toggleNotify.isEnabled())
                     ClientUtils.notify(getName(), "Enabled", Notification.Icon.Check, 1);
             }
         }
@@ -75,10 +76,10 @@ public class Rat {
 
         if (!this.isHidden()) {
             if (!this.getName().toLowerCase().endsWith("gui")) {
-                if (Gui.moduleSounds.isToggled())
+                if (Gui.moduleSounds.isEnabled())
                     SoundUtils.playSound(SoundUtils.click, 1F, 0.7F);
 
-                if (Gui.toggleNotify.isToggled())
+                if (Gui.toggleNotify.isEnabled())
                     if (!this.isHidden())
                         if (NotificationManager.pending.isEmpty())
                             ClientUtils.notify(getName(), "Disabled", Notification.Icon.No, 1);
@@ -101,33 +102,33 @@ public class Rat {
     }
 
     public void toggle() {
-        if (this.toggled)
+        if (isEnabled())
             this.onDisable();
         else
             this.onEnable();
     }
 
     public String getName() {
-        return skmok;
+        return name;
     }
 
     public Category getCategory() {
-        return this.smmko;
+        return this.category;
     }
 
     public String getDescription() {
-        return this.skkmo;
+        return description;
     }
 
-    public boolean isToggled() {
+    public boolean isEnabled() {
         return toggled;
     }
 
-    public void setKeycode(int keycode) {
-        this.bind = keycode;
+    public void setBind(int bind) {
+        this.bind = bind;
     }
 
-    public int getKeycode() {
+    public int getBind() {
         return bind;
     }
 
@@ -144,7 +145,7 @@ public class Rat {
     }
 
     public ArrayList<SettingHelper> getSettings() {
-        return this.ksmo;
+        return this.settings;
     }
 
     public void addSetting(SettingHelper Setting) {
@@ -156,8 +157,8 @@ public class Rat {
 
         public final String name;
 
-        Category(String n) {
-            this.name = n;
+        Category(String name) {
+            this.name = name;
         }
 
         public String getName() {
@@ -178,31 +179,32 @@ public class Rat {
             this.addBigRat(new Friends_Gui());
             this.addBigRat(new Target_Hud());
             this.addBigRat(new Animations());
-            this.addBigRat(new Legit_Mode());
+            this.addBigRat(new Legit_Screen());
             this.addBigRat(new Bunny_Hop());
+            this.addBigRat(new Auto_Chat());
             this.addBigRat(new Aimassist());
             this.addBigRat(new Hit_Delay());
-            this.addBigRat(new Auto_Chat());
             this.addBigRat(new FPS_Boost());
             this.addBigRat(new Scaffold());
             this.addBigRat(new Detector());
             //this.addBigRat(new Nametags());
             this.addBigRat(new Text_Gui());
+            this.addBigRat(new No_Slow());
             this.addBigRat(new Parkour());
             this.addBigRat(new Clicker());
-            this.addBigRat(new No_Slow());
-            this.addBigRat(new Refill());
             this.addBigRat(new Chams());
+            this.addBigRat(new Refill());
             this.addBigRat(new Eagle());
             this.addBigRat(new Blink());
-            this.addBigRat(new Spin());
             this.addBigRat(new Aura());
+            this.addBigRat(new Spin());
             this.addBigRat(new Esp());
             this.addBigRat(new Gui());
+            this.addBigRat(new ScaffoldWalk());
         }
 
-        private void addBigRat(Rat smok) {
-            this.bigRats.add(smok);
+        private void addBigRat(Rat bigRat) {
+            this.bigRats.add(bigRat);
             this.bigRatsCount++;
         }
 
@@ -351,11 +353,13 @@ public class Rat {
         public final static String hit_delay_desc = "Fix the hit delay when not hitting";
 
         // Arraylist
-        public final static String arraylist_ver = "1.3";
+        public final static String arraylist_ver = "1.5";
         public final static String arraylist_name = "Text Gui";
         public final static String arraylist_desc = "A list of enabled modules";
-        public final static String arraylist_randomColor = "Random Color";
         public final static String arraylist_visualModules = "Visual Modules";
+        public final static String arraylist_drawIcon = "Render Icon";
+        public final static String arraylist_colorMode = "Color Mode";
+        public final static String arraylist_brightness = "Brightness";
 
         // Parkour
         public final static String parkour_ver = "1.1";
@@ -373,8 +377,8 @@ public class Rat {
         public final static String clicker_onlyWhileLooking = "Only while Looking";
         public final static String clicker_onlyWhileHoldingBlock = "Only Block in hand";
         public final static String clicker_left = "Left";
-        public final static String clicker_leftCpsMax = "Left Cps Min";
-        public final static String clicker_leftCpsMin = "Left Cps Max";
+        public final static String clicker_leftCpsMin = "Left Cps Min";
+        public final static String clicker_leftCpsMax = "Left Cps Max";
         public final static String clicker_onlyWhileTargeting = "Only while Targeting";
         public final static String clicker_breakBlocks = "Break Blocks";
         public final static String clicker_onlyWeapon = "Only Weapon";
@@ -393,7 +397,7 @@ public class Rat {
         public final static String eagle_blockChecks = "Block " + Var.checks;
 
         // Blink
-        public final static String blink_ver = "1.9";
+        public final static String blink_ver = "2.1";
         public final static String blink_name = "Blink";
         public final static String blink_desc = "Makes you lag server sided";
         public final static String blink_cancelAllPackets = "Cancel all packets";
@@ -417,6 +421,7 @@ public class Rat {
         public final static String aura_ignoreFriends = "Ignore Friends";
         public final static String aura_thruWalls = "Thru Walls";
         public final static String aura_blockBlocking = "Block Blocking";
+        public final static String aura_autoBlockAnimation = "Block Block Animation";
         public final static String aura_esp = "Show Target";
         public final static String aura_mode = "Rotation Mode";
         public final static String aura_yawMin = "Random Yaw Min";
@@ -501,8 +506,8 @@ public class Rat {
         public final static String fpsBoost_Desc = "Boosts your FPS";
 
         // Friends Gui
-        public final static String friendsgui_ver = "1.2";
-        public final static String friendsgui_name = "Friengs Gui";
+        public final static String friendsgui_ver = "1.3";
+        public final static String friendsgui_name = "Friends Gui";
         public final static String friendsgui_desc = "Draws infos about ur friends";
 
         // Detector

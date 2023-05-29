@@ -29,7 +29,7 @@ public class Head_Hitter extends Rat {
     public void tick(EventTick e) {
         if (Utils.canLegitWork()) {
 
-            if (movingOnly.isToggled())
+            if (movingOnly.isEnabled())
                 if (!Utils.isMoving())
                     return;
 

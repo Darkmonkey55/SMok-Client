@@ -1,6 +1,5 @@
 package net.minecraft.client.club.maxstats.weaveyoutube.listener;
 
-import club.maxstats.weave.loader.api.event.SubscribeEvent;
 import net.minecraft.client.club.maxstats.weaveyoutube.event.RenderLivingEvent;
 import net.minecraft.client.me.sleepyfish.smok.Smok;
 import net.minecraft.client.me.sleepyfish.smok.utils.*;
@@ -17,6 +16,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.client.renderer.GlStateManager;
+import net.weavemc.loader.api.event.SubscribeEvent;
 import org.lwjgl.opengl.GL11;
 import java.awt.Color;
 
@@ -27,18 +27,18 @@ public class RenderListener {
     public boolean render = true;
 
     @SubscribeEvent
-    public void onMyEvent(RenderLivingEvent e) {
+    public void renderEvent(RenderLivingEvent e) {
         if (Smok.inst.ratManager != null) {
             if (e.entity != Smok.inst.mc.thePlayer && e.entity != Utils.Npc.getNpc()) {
-                if (Smok.inst.ratManager.getBigRatByClass(Esp.class).isToggled())
+                if (Smok.inst.ratManager.getBigRatByClass(Esp.class).isEnabled())
                     this.renderESP(e.entity, e.partialTicks);
 
                 if (Smok.inst.ratManager.getBigRatByClass(Nametags.class) != null)
-                    if (Smok.inst.ratManager.getBigRatByClass(Nametags.class).isToggled())
+                    if (Smok.inst.ratManager.getBigRatByClass(Nametags.class).isEnabled())
                         this.renderNametag(e.entity, e.partialTicks);
             }
 
-            if (Aura.esp.isToggled() && Smok.inst.ratManager.getBigRatByClass(Aura.class).isToggled())
+            if (Aura.esp.isEnabled() && Smok.inst.ratManager.getBigRatByClass(Aura.class).isEnabled())
                 if (TargetUtils.getTarget() != null && !Utils.inGui())
                     if (Utils.Combat.inRange(TargetUtils.getTarget(), Aura.attackRange.getValue()))
                         RenderUtils.drawTargetCapsule(TargetUtils.getTarget(), 0.8D, e.partialTicks);
@@ -94,7 +94,7 @@ public class RenderListener {
                 GL11.glVertex2f(-sizeFromCenter + 0.5F, sizeFromCenter);
                 GL11.glEnd();
 
-                if (Esp.showHealth.isToggled()) {
+                if (Esp.showHealth.isEnabled()) {
                     float healthSize = (entity.getHealth() / entity.getMaxHealth()) * size;
                     GlStateManager.color(1.0F - healthSize, healthSize, 0.0F);
                     GL11.glBegin(GL11.GL_QUADS);
@@ -109,13 +109,13 @@ public class RenderListener {
             }
 
             if (Esp.mode.getMode() == Esp.modes.Smok)
-                RenderUtils.drawImage(FileUtils.path + "/modules/esp_1.png", -1, -1, 2, 3, 255F);
+                RenderUtils.drawImage("modules/esp_1.png", -1, -1, 2, 3);
 
             if (Esp.mode.getMode() == Esp.modes.FischKock)
-                RenderUtils.drawImage(FileUtils.path + "/modules/esp_2.png", -1, -1, 2, 3, 255F);
+                RenderUtils.drawImage("modules/esp_2.png", -1, -1, 2, 3);
 
             if (Esp.mode.getMode() == Esp.modes.Kioshii)
-                RenderUtils.drawImage(FileUtils.path + "/modules/esp_3.png", -1, -1, 2, 3, 255F);
+                RenderUtils.drawImage("modules/esp_3.png", -1, -1, 2, 3);
 
             if (Esp.mode.getMode() == Esp.modes.Capsule) {
                 GlUtils.enableSeeThru();
@@ -137,7 +137,7 @@ public class RenderListener {
                 RenderGlobal.drawSelectionBoundingBox(box);
                 ColorUtils.clearColor();
 
-                if (Esp.showHealth.isToggled()) {
+                if (Esp.showHealth.isEnabled()) {
                     GL11.glTranslated(centerX, centerY + (entityHeight / 2), centerZ);
                     GL11.glRotatef(-Minecraft.getMinecraft().getRenderManager().playerViewY, 0F, 1F, 0F);
 

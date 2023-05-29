@@ -18,7 +18,7 @@ public class RoundedUtils {
     public static ShaderUtils roundedShader = new ShaderUtils(FileUtils.path + "/shaders/roundedRect.frag");
 
     public static void drawGradientRoundLR(float x, float y, float width, float height, float radius, Color color1, Color color2) {
-        drawGradientRound(x, y, width, height, radius, color1, color2, color2, color1);
+        RoundedUtils.drawGradientRound(x, y, width, height, radius, color1, color2, color2, color1);
     }
 
     public static void drawRound(float x, float y, float width, float height, float radius, Color color) {
@@ -26,7 +26,7 @@ public class RoundedUtils {
         GlStateManager.enableBlend();
         GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         roundedShader.init();
-        setupRoundedRectUniforms(x, y, width, height, radius, roundedShader);
+        RoundedUtils.setupRoundedRectUniforms(x, y, width, height, radius, roundedShader);
         roundedShader.setUniformf("color", color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, color.getAlpha() / 255f);
         ShaderUtils.drawQuads(x - 1, y - 1, width + 2, height + 2);
         roundedShader.unload();
@@ -38,7 +38,7 @@ public class RoundedUtils {
         GlStateManager.enableBlend();
         GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         roundedGradientShader.init();
-        setupRoundedRectUniforms(x, y, width, height, radius, roundedGradientShader);
+        RoundedUtils.setupRoundedRectUniforms(x, y, width, height, radius, roundedGradientShader);
         roundedGradientShader.setUniformf("color1", topLeft.getRed() / 255f, topLeft.getGreen() / 255f, topLeft.getBlue() / 255f, topLeft.getAlpha() / 255f);
         roundedGradientShader.setUniformf("color2", bottomRight.getRed() / 255f, bottomRight.getGreen() / 255f, bottomRight.getBlue() / 255f, bottomRight.getAlpha() / 255f);
         roundedGradientShader.setUniformf("color3", bottomLeft.getRed() / 255f, bottomLeft.getGreen() / 255f, bottomLeft.getBlue() / 255f, bottomLeft.getAlpha() / 255f);
@@ -46,33 +46,34 @@ public class RoundedUtils {
         ShaderUtils.drawQuads(x - 1, y - 1, width + 2, height + 2);
         roundedGradientShader.unload();
         GlStateManager.disableBlend();
+
     }
 
     public static void drawRoundOutline(float x, float y, float width, float height, float radius, float outlineThickness, Color color, Color outlineColor) {
-        ColorUtils.clearColor();
         GlStateManager.enableBlend();
         GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         roundedOutlineShader.init();
         ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
-        setupRoundedRectUniforms(x, y, width, height, radius, roundedOutlineShader);
+        RoundedUtils.setupRoundedRectUniforms(x, y, width, height, radius, roundedOutlineShader);
         roundedOutlineShader.setUniformf("outlineThickness", outlineThickness * sr.getScaleFactor());
         roundedOutlineShader.setUniformf("color", color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f, color.getAlpha() / 255f);
         roundedOutlineShader.setUniformf("outlineColor", outlineColor.getRed() / 255f, outlineColor.getGreen() / 255f, outlineColor.getBlue() / 255f, outlineColor.getAlpha() / 255f);
         ShaderUtils.drawQuads(x - (2 + outlineThickness), y - (2 + outlineThickness), width + (4 + outlineThickness * 2), height + (4 + outlineThickness * 2));
         roundedOutlineShader.unload();
-        GlStateManager.disableBlend();
     }
+
 
     public static void drawRoundTextured(float x, float y, float width, float height, float radius, float alpha) {
         ColorUtils.clearColor();
         roundedTexturedShader.init();
         roundedTexturedShader.setUniform("textureIn", 0);
-        setupRoundedRectUniforms(x, y, width, height, radius, roundedTexturedShader);
+        RoundedUtils.setupRoundedRectUniforms(x, y, width, height, radius, roundedTexturedShader);
         roundedTexturedShader.setUniformf("alpha", alpha);
         ShaderUtils.drawQuads(x - 1, y - 1, width + 2, height + 2);
         roundedTexturedShader.unload();
         GlStateManager.disableBlend();
     }
+
 
     private static void setupRoundedRectUniforms(float x, float y, float width, float height, float radius, ShaderUtils textShader) {
         ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());

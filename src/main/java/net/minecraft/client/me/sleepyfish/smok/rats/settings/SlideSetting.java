@@ -1,5 +1,6 @@
 package net.minecraft.client.me.sleepyfish.smok.rats.settings;
 
+import java.awt.*;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 

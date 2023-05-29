@@ -41,17 +41,17 @@ public class Eagle extends Rat {
     public void tick(EventTick e) {
         if (Utils.canLegitWork()) {
 
-            if (blocksOnly.isToggled())
+            if (blocksOnly.isEnabled())
                 if (!Utils.holdingBlock())
                     return;
 
-            if (backwardsOnly.isToggled())
+            if (backwardsOnly.isEnabled())
                 if (!Utils.isMovingBackwards())
                     return;
 
-            if (fixForward.isToggled())
+            if (fixForward.isEnabled())
                 if (mc.thePlayer.isSneaking() && Utils.isMovingForward()) {
-                    if (onlyFixWithoutBlocks.isToggled())
+                    if (onlyFixWithoutBlocks.isEnabled())
                         if (Utils.holdingBlock())
                             return;
 
@@ -59,7 +59,7 @@ public class Eagle extends Rat {
                         setShift(false);
                 }
 
-            if (fastMode.isToggled()) {
+            if (fastMode.isEnabled()) {
                 if (Utils.overAir(1) && !mc.thePlayer.isSneaking())
                     setShift(true);
 

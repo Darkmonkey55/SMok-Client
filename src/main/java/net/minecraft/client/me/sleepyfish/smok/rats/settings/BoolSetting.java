@@ -16,7 +16,7 @@ public class BoolSetting extends SettingHelper {
       return "tick";
    }
 
-   public boolean isToggled() {
+   public boolean isEnabled() {
       return this.isEnabled;
    }
 

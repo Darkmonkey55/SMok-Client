@@ -37,7 +37,7 @@ public class Refill extends Rat {
 
     @SmokEvent
     public void onTick(EventTick e) {
-        if (invOnly.isToggled())
+        if (invOnly.isEnabled())
             if (!Utils.inInv())
                 return;
 
@@ -46,7 +46,7 @@ public class Refill extends Rat {
                 if (slot.getStack() != null) {
                     long delay;
 
-                    if (randomDelay.isToggled())
+                    if (randomDelay.isEnabled())
                         delay = MathUtils.randomLong(delayRandomMin.getValueToLong() * 5L, delayRandomMax.getValueToLong() * 5L);
                     else
                         delay = normalDelay.getValueToLong() * 5L;

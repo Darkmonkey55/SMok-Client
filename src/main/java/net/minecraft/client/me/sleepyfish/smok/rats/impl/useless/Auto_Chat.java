@@ -1,7 +1,7 @@
 package net.minecraft.client.me.sleepyfish.smok.rats.impl.useless;
 
 import net.minecraft.client.club.maxstats.weaveyoutube.event.EventTick;
-import net.minecraft.client.club.maxstats.weaveyoutube.event.EventSendPacket;
+import net.minecraft.client.club.maxstats.weaveyoutube.event.EventSendPacketPre;
 import net.minecraft.client.me.sleepyfish.smok.Smok;
 import net.minecraft.client.me.sleepyfish.smok.rats.Rat;
 import net.minecraft.client.me.sleepyfish.smok.utils.Utils;
@@ -58,7 +58,7 @@ public class Auto_Chat extends Rat {
     @SmokEvent
     public void onTick(EventTick e) {
         if (Utils.canLegitWork()) {
-            if (randomMessage.isToggled()) {
+            if (randomMessage.isEnabled()) {
                 // Goofy ahh code :)
                 int smok = MathUtils.randomInt(1, modes.values().length); // 31
 
@@ -147,7 +147,7 @@ public class Auto_Chat extends Rat {
                     mode.setMode(modes.BestSong);
 
                 if (smok == 29)
-                    if (!blockIP.isToggled())
+                    if (!blockIP.isEnabled())
                         mode.setMode(modes.IPLeak);
 
                 if (smok == 30)
@@ -244,13 +244,13 @@ public class Auto_Chat extends Rat {
                     message = "Enabled Modules: ";
 
                     for (Rat m : Smok.inst.ratManager.getBigRats())
-                        if (m.isToggled() && !m.isHidden())
+                        if (m.isEnabled() && !m.isHidden())
                             message += m.getName() + ", ";
                 }
             }
 
-            if (bypass.isToggled()) {
-                if (!bypassText.isToggled())
+            if (bypass.isEnabled()) {
+                if (!bypassText.isEnabled())
                     message += " - [" + MathUtils.randomInt(-999, 99999) + "]";
                 else
                     message += " - Easy baipai: [" + MathUtils.randomInt(-999, 99999) + "]";
@@ -262,8 +262,8 @@ public class Auto_Chat extends Rat {
     }
 
     @SmokEvent
-    public void onPacket(EventSendPacket e) {
-        if (this.isToggled())
+    public void onPacket(EventSendPacketPre e) {
+        if (this.isEnabled())
             if (Utils.canLegitWork())
                 if (Timer.hasTimeElapsed(2800L, true))
                     if (mode.getMode() == modes.Packets)

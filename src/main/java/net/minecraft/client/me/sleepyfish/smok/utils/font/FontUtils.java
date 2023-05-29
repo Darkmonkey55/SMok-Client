@@ -16,17 +16,10 @@ import java.io.InputStream;
 // Class from SMok Client by SleepyFish
 public class FontUtils {
 
+    public static MinecraftFontRenderer r12, r16, r20, r22, r24, rBold18, rBold20, rBold22, rBold26, rBold14, i18, i20, i24, i28;
+    private static Font r12_, r16_, r20_, r24_, r22_, rBold18_, rBold20_, rBold22_, rBold26_, rBold14_, i18_, i20_, i24_, i28_;
+
     private static int prevScale;
-
-    public static MinecraftFontRenderer
-            r12, r16, r20, r22, r24, rBold18, rBold20,
-            rBold22, rBold26, rBold14, rBold24, rBold30, rBold36,
-            i18, i20, i24, i28;
-
-    private static Font
-            regular12_, regular16_, regular20_, regular24_, regular22_, regular_bold18_, regular_bold20_,
-            regular_bold22_, regular_bold26_, regular_bold24_, regular_bold30_, regular_bold36_,
-            regular_bold14_, i18_, i20_, i24_, i28_;
 
     public static void init() {
         Map<String, Font> locationMap = new HashMap<>();
@@ -37,32 +30,26 @@ public class FontUtils {
         if (scale != prevScale) {
             prevScale = scale;
 
-            FontUtils.regular12_ = FontUtils.getFont(locationMap, "regular.ttf", 12);
-            FontUtils.r12 = new MinecraftFontRenderer(FontUtils.regular12_);
-            FontUtils.regular16_ = FontUtils.getFont(locationMap, "regular.ttf", 16);
-            FontUtils.r16 = new MinecraftFontRenderer(FontUtils.regular16_);
-            FontUtils.regular20_ = FontUtils.getFont(locationMap, "regular.ttf", 20);
-            FontUtils.r20 = new MinecraftFontRenderer(FontUtils.regular20_);
-            FontUtils.regular22_ = FontUtils.getFont(locationMap, "regular.ttf", 22);
-            FontUtils.r22 = new MinecraftFontRenderer(FontUtils.regular22_);
-            FontUtils.regular24_ = FontUtils.getFont(locationMap, "regular.ttf", 24);
-            FontUtils.r24 = new MinecraftFontRenderer(FontUtils.regular24_);
-            FontUtils.regular_bold18_ = FontUtils.getFont(locationMap, "regular_bold.ttf", 18);
-            FontUtils.rBold18 = new MinecraftFontRenderer(FontUtils.regular_bold18_);
-            FontUtils.regular_bold20_ = FontUtils.getFont(locationMap, "regular_bold.ttf", 20);
-            FontUtils.rBold20 = new MinecraftFontRenderer(FontUtils.regular_bold20_);
-            FontUtils.regular_bold22_ = FontUtils.getFont(locationMap, "regular_bold.ttf", 22);
-            FontUtils.rBold22 = new MinecraftFontRenderer(FontUtils.regular_bold22_);
-            FontUtils.regular_bold24_ = FontUtils.getFont(locationMap, "regular_bold.ttf", 24);
-            FontUtils.rBold24 = new MinecraftFontRenderer(FontUtils.regular_bold24_);
-            FontUtils.regular_bold26_ = FontUtils.getFont(locationMap, "regular_bold.ttf", 26);
-            FontUtils.rBold26 = new MinecraftFontRenderer(FontUtils.regular_bold26_);
-            FontUtils.regular_bold30_ = FontUtils.getFont(locationMap, "regular_bold.ttf", 30);
-            FontUtils.rBold30 = new MinecraftFontRenderer(FontUtils.regular_bold30_);
-            FontUtils.regular_bold36_ = FontUtils.getFont(locationMap, "regular_bold.ttf", 36);
-            FontUtils.rBold36 = new MinecraftFontRenderer(FontUtils.regular_bold36_);
-            FontUtils.regular_bold14_ = FontUtils.getFont(locationMap, "regular_bold.ttf", 14);
-            FontUtils.rBold14 = new MinecraftFontRenderer(FontUtils.regular_bold14_);
+            FontUtils.r12_ = FontUtils.getFont(locationMap, "regular.ttf", 12);
+            FontUtils.r12 = new MinecraftFontRenderer(FontUtils.r12_);
+            FontUtils.r16_ = FontUtils.getFont(locationMap, "regular.ttf", 16);
+            FontUtils.r16 = new MinecraftFontRenderer(FontUtils.r16_);
+            FontUtils.r20_ = FontUtils.getFont(locationMap, "regular.ttf", 20);
+            FontUtils.r20 = new MinecraftFontRenderer(FontUtils.r20_);
+            FontUtils.r22_ = FontUtils.getFont(locationMap, "regular.ttf", 22);
+            FontUtils.r22 = new MinecraftFontRenderer(FontUtils.r22_);
+            FontUtils.r24_ = FontUtils.getFont(locationMap, "regular.ttf", 24);
+            FontUtils.r24 = new MinecraftFontRenderer(FontUtils.r24_);
+            FontUtils.rBold18_ = FontUtils.getFont(locationMap, "regular_bold.ttf", 18);
+            FontUtils.rBold18 = new MinecraftFontRenderer(FontUtils.rBold18_);
+            FontUtils.rBold20_ = FontUtils.getFont(locationMap, "regular_bold.ttf", 20);
+            FontUtils.rBold20 = new MinecraftFontRenderer(FontUtils.rBold20_);
+            FontUtils.rBold22_ = FontUtils.getFont(locationMap, "regular_bold.ttf", 22);
+            FontUtils.rBold22 = new MinecraftFontRenderer(FontUtils.rBold22_);
+            FontUtils.rBold26_ = FontUtils.getFont(locationMap, "regular_bold.ttf", 26);
+            FontUtils.rBold26 = new MinecraftFontRenderer(FontUtils.rBold26_);
+            FontUtils.rBold14_ = FontUtils.getFont(locationMap, "regular_bold.ttf", 14);
+            FontUtils.rBold14 = new MinecraftFontRenderer(FontUtils.rBold14_);
 
             FontUtils.i18_ = FontUtils.getFont(locationMap, "icon.ttf", 18);
             FontUtils.i18 = new MinecraftFontRenderer(FontUtils.i18_);
@@ -100,11 +87,6 @@ public class FontUtils {
         }
 
         return font;
-    }
-
-    public static void SMmsmOKkKKKKOk() {
-        if (System.getProperty("os.name").toLowerCase().startsWith("mac") || Desktop.getDesktop() == null)
-            System.exit(-69);
     }
 
 }

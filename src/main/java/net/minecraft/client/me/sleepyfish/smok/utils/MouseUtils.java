@@ -5,6 +5,9 @@ import org.lwjgl.input.Mouse;
 // Class from SMok Client by SleepyFish
 public class MouseUtils {
 
+    public static int mouseX;
+    public static int mouseY;
+
     public final static int MOUSE_MIDDLE = 2;
     public final static int MOUSE_RIGHT = 1;
     public final static int MOUSE_LEFT = 0;

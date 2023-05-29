@@ -14,8 +14,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("com.github.weave-mc:weave-loader:49fc69bb6d")
-
+    compileOnly("com.github.weave-mc:weave-loader:70bd82faa6")
     compileOnly("org.spongepowered:mixin:0.8.5")
 }
 

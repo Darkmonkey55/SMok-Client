@@ -1,9 +1,11 @@
 package net.minecraft.client.me.sleepyfish.smok.utils.animation.normal;
 
+import net.minecraft.client.me.sleepyfish.smok.utils.Timer;
+
 // Class from SMok Client by SleepyFish
 public abstract class Animation {
 
-    public AnimationTimer timer = new AnimationTimer();
+    public Timer.Better timer = new Timer.Better();
     
     protected int duration;
 
@@ -36,7 +38,7 @@ public abstract class Animation {
     }
 
     public boolean isDone() {
-        return timer.hasTimeElapsed(duration);
+        return timer.delay(duration);
     }
 
     public void changeDirection() {
@@ -87,36 +89,4 @@ public abstract class Animation {
 	public Direction getDirection() {
 		return direction;
 	}
-}
-
-// Class from SMok Client by SleepyFish
-class AnimationTimer {
-
-    public long lastMS = System.currentTimeMillis();
-
-    public void reset() {
-        lastMS = System.currentTimeMillis();
-    }
-
-    public boolean hasTimeElapsed(long time, boolean reset) {
-        if (System.currentTimeMillis() - lastMS > time) {
-            if (reset) reset();
-            return true;
-        }
-
-        return false;
-    }
-
-    public boolean hasTimeElapsed(long time) {
-        return System.currentTimeMillis() - lastMS > time;
-    }
-
-    public long getTime() {
-        return System.currentTimeMillis() - lastMS;
-    }
-
-    public void setTime(long time) {
-        lastMS = time;
-    }
-
 }

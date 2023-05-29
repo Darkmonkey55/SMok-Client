@@ -4,11 +4,11 @@ import net.minecraft.client.me.sleepyfish.smok.rats.event.Event;
 import net.minecraft.network.Packet;
 
 // Class from SMok Client by SleepyFish
-public class EventSendPacket extends Event {
+public class EventSendPacketPre extends Event {
 
     private Packet<?> packet;
 
-    public EventSendPacket(Packet<?> packet) {
+    public EventSendPacketPre(Packet<?> packet) {
         this.packet = packet;
     }
 

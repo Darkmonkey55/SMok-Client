@@ -1,8 +1,6 @@
 package net.minecraft.client.me.sleepyfish.smok.gui.comp.impl;
 
-import net.minecraft.client.me.sleepyfish.smok.Smok;
 import net.minecraft.client.me.sleepyfish.smok.rats.Rat;
-import net.minecraft.client.me.sleepyfish.smok.utils.Timer;
 import net.minecraft.client.me.sleepyfish.smok.rats.settings.*;
 import net.minecraft.client.me.sleepyfish.smok.gui.comp.IComp;
 import net.minecraft.client.me.sleepyfish.smok.utils.MouseUtils;
@@ -72,18 +70,22 @@ public class ModuleComp implements IComp {
    public void draw() {
       int msko = 2;
 
-      int oldColor = this.rat.isToggled() ? ColorUtils.getFontColor(2).getRGB() : ColorUtils.getFontColor(2).darker().darker().getRGB();
+      Color oldColor = this.rat.isEnabled() ? ColorUtils.getFontColor(2) : ColorUtils.getFontColor(2).darker().darker();
 
-      if (this.rat.isToggled())
+      if (this.rat.isEnabled())
          RoundedUtils.drawRound(this.category.getX(), this.category.getY() + this.off + 1, 82, 12, 2, ColorUtils.getClientColor(this.rat.hashCode() * 100).darker().darker());
 
       FontUtils.r16.drawString(rat.getName(), this.category.getX() + 4F, this.category.getY() + this.off + 5, oldColor);
 
       if (!this.settings.isEmpty()) {
+         FontUtils.i20.drawString("k", (int) (this.category.getX() + 71F), this.category.getY() + this.off + 5, ColorUtils.getFontColor(2));
+
+         /*
          if (this.isExpanded())
-            FontUtils.i20.drawString("J", (int) (this.category.getX() + 71F), this.category.getY() + this.off + 5, ColorUtils.getFontColor(2).getRGB());
+            FontUtils.i20.drawString("J", (int) (this.category.getX() + 71F), this.category.getY() + this.off + 5, ColorUtils.getFontColor(2));
          else
-            FontUtils.i20.drawString("K", (int) (this.category.getX() + 71F), this.category.getY() + this.off + 5, ColorUtils.getFontColor(2).getRGB());
+            FontUtils.i20.drawString("K", (int) (this.category.getX() + 71F), this.category.getY() + this.off + 5, ColorUtils.getFontColor(2));
+          */
 
          ColorUtils.clearColor();
       }
@@ -96,23 +98,23 @@ public class ModuleComp implements IComp {
       if (this.isHoverOverKeybind(mouseX, mouseY)) {
          RenderUtils.drawRound(this.category.getX() + 60, this.category.getY() + this.off + msko, this.category.getX() + 70, this.category.getY() + this.off + msko + 10, 2, color);
 
-         if (rat.getKeycode() == 0)
-            FontUtils.i18.drawString("n", this.category.getX() + 61, this.category.getY() + this.off + msko + 3, ColorUtils.getFontColor(2).getRGB());
+         if (rat.getBind() == 0)
+            FontUtils.i18.drawString("n", this.category.getX() + 61, this.category.getY() + this.off + msko + 3, ColorUtils.getFontColor(2));
       }
 
-      if (rat.getKeycode() != 0) {
+      if (rat.getBind() != 0) {
          RenderUtils.drawRound(this.category.getX() + 60, this.category.getY() + this.off + msko, this.category.getX() + 70, this.category.getY() + this.off + msko + 10, 2, color);
 
          if (!isBinding)
-            if (Keyboard.getKeyName(rat.getKeycode()) != null)
-               FontUtils.r16.drawString(Keyboard.getKeyName(rat.getKeycode()).replace("NONE", " "), (int) (this.category.getX() + 63F), this.category.getY() + this.off + msko + 3, ColorUtils.getFontColor(2).getRGB());
+            if (Keyboard.getKeyName(rat.getBind()) != null)
+               FontUtils.r16.drawString(Keyboard.getKeyName(rat.getBind()).replace("NONE", " "), (int) (this.category.getX() + 63F), this.category.getY() + this.off + msko + 3, ColorUtils.getFontColor(2));
          else
-               FontUtils.i18.drawString("n", this.category.getX() + 61, this.category.getY() + this.off + msko + 3, ColorUtils.getFontColor(2).getRGB());
+               FontUtils.i18.drawString("n", this.category.getX() + 61, this.category.getY() + this.off + msko + 3, ColorUtils.getFontColor(2));
       }
 
       if (isBinding) {
          RenderUtils.drawRound(this.category.getX() + 60, this.category.getY() + this.off + msko, this.category.getX() + 70, this.category.getY() + this.off + msko + 10, 2, color);
-         FontUtils.i18.drawString("n", this.category.getX() + 61, this.category.getY() + this.off + msko + 3, ColorUtils.getFontColor(2).getRGB());
+         FontUtils.i18.drawString("n", this.category.getX() + 61, this.category.getY() + this.off + msko + 3, ColorUtils.getFontColor(2));
       }
 
       if (isExpanded() && !this.settings.isEmpty())
@@ -138,9 +140,6 @@ public class ModuleComp implements IComp {
 
    public void update(int mouseX, int mouseY) {
       if (ClientUtils.inClickGui()) {
-         if (Timer.hasTimeElapsed(500L, true))
-            Smok.inst.colManager.mosk();
-
          if (!this.settings.isEmpty())
             for (IComp c : this.settings)
                c.update(mouseX, mouseY);
@@ -149,7 +148,7 @@ public class ModuleComp implements IComp {
             RoundedUtils.drawRoundOutline(mouseX + 5, mouseY + 13, (int) (FontUtils.r16.getStringWidth(rat.getDescription())),
                     (int) ((FontUtils.r16.getHeight() * 1.2F) - 2), 1, 2.2F, ColorUtils.getBackgroundColor(5), ColorUtils.getBackgroundColor(5).brighter());
 
-            FontUtils.r16.drawString(rat.getDescription(), mouseX + 5, mouseY + 13, ColorUtils.getClientColor(90000).getRGB());
+            FontUtils.r16.drawString(rat.getDescription(), mouseX + 5, mouseY + 13, ColorUtils.getClientColor(90000));
          }
 
          this.mouseX = mouseX;
@@ -157,42 +156,45 @@ public class ModuleComp implements IComp {
       }
    }
 
-   public void mouseDown(int x, int y, int smok) {
+   public void mouseDown(int x, int y, int b) {
       if (!rat.isHidden()) {
-         if (this.isHoveringOverModule(x, y) && smok == 0)
+         if (this.isHoveringOverModule(x, y) && b == 0)
             this.rat.toggle();
 
-         if (this.isHoveringOverModule(x, y) && smok == 1)
+         if (this.isHoveringOverModule(x, y) && b == 1)
             if (!this.settings.isEmpty()) {
                this.expanded = !this.expanded;
                this.category.render();
             }
 
-         // Text gui mouse update soon...
-
-         if (this.isHoverOverKeybind(x, y) && smok == 0)
+         if (this.isHoverOverKeybind(x, y) && b == 0)
             isBinding = true;
+
+         if (isBinding && b == 1) {
+            rat.setBind(Keyboard.KEY_NONE);
+            isBinding = false;
+         }
       }
 
-      for (IComp smmOK : this.settings)
-         if (smmOK.getY() > getY())
-            smmOK.mouseDown(x, y, smok);
+      for (IComp comp : this.settings)
+         if (comp.getY() > getY())
+            comp.mouseDown(x, y, b);
    }
 
    public void mouseReleased(int x, int y, int b) {
-      for (IComp smmOK : this.settings)
-         smmOK.mouseReleased(x, y, b);
+      for (IComp comp : this.settings)
+         comp.mouseReleased(x, y, b);
    }
 
    public void keyTyped(char chara, int key) {
-      for (IComp smmOK : this.settings)
-         smmOK.keyTyped(chara, key);
+      for (IComp comp : this.settings)
+         comp.keyTyped(chara, key);
 
       if (isBinding) {
          if (key != Keyboard.KEY_0)
-            rat.setKeycode(key);
+            rat.setBind(key);
          else
-            rat.setKeycode(Keyboard.KEY_NONE);
+            rat.setBind(Keyboard.KEY_NONE);
 
          isBinding = false;
       }
@@ -203,7 +205,8 @@ public class ModuleComp implements IComp {
    }
 
    public boolean isHoveringOverModule(int x, int y) {
-      return x > this.category.getX() && x < this.category.getX() + this.category.getWidth() - 24 && y > this.category.getY() + this.off && y < this.category.getY() + FastEditUtils.ratGap + this.off;
+      return MouseUtils.isInside(x, y, this.category.getWidth() - 24, this.category.getY() + this.off, off, FastEditUtils.ratGap + this.off);
+      //return x > this.category.getX() && x < this.category.getX() + this.category.getWidth() - 24 && y > this.category.getY() + this.off && y < this.category.getY() + FastEditUtils.ratGap + this.off;
    }
 
    public boolean isExpanded() {

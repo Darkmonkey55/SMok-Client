@@ -49,12 +49,12 @@ public class BooleanComp implements IComp {
       GL11.glPushMatrix();
       GL11.glScaled(0.5D, 0.5D, 0.5D);
 
-      if (this.bool.isToggled())
+      if (this.bool.isEnabled())
          RoundedUtils.drawRound((this.module.getCategory().getX() + 72.5F) * 2, (float) ((this.module.getCategory().getY() + this.off + 3) * 2), 10, 10, 10, ColorUtils.getClientColor(1));
       else
          RoundedUtils.drawRound((this.module.getCategory().getX() + 72.5F) * 2, (float) ((this.module.getCategory().getY() + this.off + 3) * 2), 10, 10, 10, ColorUtils.getBackgroundColor(5).darker().darker());
 
-      FontUtils.r24.drawString(this.bool.getSettingName(), (float) ((this.module.getCategory().getX() + 4) * 2), (float) ((this.module.getCategory().getY() + this.off + 3) * 2), ColorUtils.getFontColor(1).darker().darker().getRGB());
+      FontUtils.r24.drawString(this.bool.getSettingName(), (float) ((this.module.getCategory().getX() + 4) * 2), (float) ((this.module.getCategory().getY() + this.off + 3) * 2), ColorUtils.getFontColor(1).darker().darker());
 
       GL11.glPopMatrix();
    }
@@ -69,7 +69,7 @@ public class BooleanComp implements IComp {
          return;
 
       if (this.isHovering(x, y) && smok == 0 && this.module.isExpanded()) {
-         if (this.bool.isToggled())
+         if (this.bool.isEnabled())
             SoundUtils.playSound(SoundUtils.click, 1F, 0.7F);
          else
             SoundUtils.playSound(SoundUtils.click, 1F, 0.8F);

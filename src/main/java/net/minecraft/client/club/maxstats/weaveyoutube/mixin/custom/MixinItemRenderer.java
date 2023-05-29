@@ -113,7 +113,7 @@ public abstract class MixinItemRenderer {
             }
               else
             {
-                if (Smok.inst.ratManager.getBigRatByClass(Animations.class).isToggled())
+                if (Smok.inst.ratManager.getBigRatByClass(Animations.class).isEnabled())
                 {
                     if (Animations.mode.getMode() == Animations.modes.Swing)
                         this.transformFirstPersonItem(var2, var4);
@@ -172,7 +172,7 @@ public abstract class MixinItemRenderer {
             }
 
             // Client sided Auto block
-            if (Smok.inst.ratManager.getBigRatByClass(Aura.class).isToggled())
+            if (Smok.inst.ratManager.getBigRatByClass(Aura.class).isEnabled())
             {
                 if (TargetUtils.getTarget() == null)
                 {
@@ -197,7 +197,7 @@ public abstract class MixinItemRenderer {
                 }
             }
 
-            if (Smok.inst.ratManager.getBigRatByClass(Animations.class).isToggled() && Animations.removeHand.isToggled())
+            if (Smok.inst.ratManager.getBigRatByClass(Animations.class).isEnabled() && Animations.removeHand.isEnabled())
             {
                 this.renderItem(var3, null, ItemCameraTransforms.TransformType.FIRST_PERSON);
             }
@@ -208,7 +208,7 @@ public abstract class MixinItemRenderer {
         }
           else if (!var3.isInvisible())
         {
-            if (Smok.inst.ratManager.getBigRatByClass(Animations.class).isToggled() && Animations.removeHand.isToggled())
+            if (Smok.inst.ratManager.getBigRatByClass(Animations.class).isEnabled() && Animations.removeHand.isEnabled())
             {
                 this.renderPlayerArm(var3, -999, 0);
             }

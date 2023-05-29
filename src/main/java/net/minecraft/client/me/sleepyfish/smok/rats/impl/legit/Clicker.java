@@ -55,18 +55,18 @@ public class Clicker extends Rat {
 
     @SmokEvent
     public void onTick(EventTick e) {
-        if (right.isToggled()) {
+        if (right.isEnabled()) {
             if (MouseUtils.isButtonDown(MouseUtils.MOUSE_RIGHT)) {
 
-                if (onlyWhileLooking.isToggled())
+                if (onlyWhileLooking.isEnabled())
                     if (mc.objectMouseOver.typeOfHit != MovingObjectPosition.MovingObjectType.BLOCK)
                         return;
 
-                if (onlyWhileHoldingBlock.isToggled())
+                if (onlyWhileHoldingBlock.isEnabled())
                     if (!Utils.holdingBlock())
                         return;
 
-                if (onlyWeapon.isToggled())
+                if (onlyWeapon.isEnabled())
                     if (!Utils.holdingBlock())
                         return;
 
@@ -77,18 +77,18 @@ public class Clicker extends Rat {
             }
         }
 
-        if (left.isToggled()) {
+        if (left.isEnabled()) {
             if (MouseUtils.isButtonDown(MouseUtils.MOUSE_LEFT)) {
 
-                if (onlyWhileTargeting.isToggled())
+                if (onlyWhileTargeting.isEnabled())
                     if (mc.objectMouseOver.typeOfHit != MovingObjectPosition.MovingObjectType.ENTITY)
                         return;
 
-                if (onlyWeapon.isToggled())
+                if (onlyWeapon.isEnabled())
                     if (!Utils.holdingWeapon())
                         return;
 
-                if (breakBlocks.isToggled()) {
+                if (breakBlocks.isEnabled()) {
                     BlockPos blockPos = mc.objectMouseOver.getBlockPos();
 
                     if (blockPos != null) {
@@ -98,7 +98,7 @@ public class Clicker extends Rat {
                     }
                 }
 
-                if (hitselect.isToggled()) {
+                if (hitselect.isEnabled()) {
                     if (!Timer.hasTimeElapsed(450L, true))
                         return;
                 } else

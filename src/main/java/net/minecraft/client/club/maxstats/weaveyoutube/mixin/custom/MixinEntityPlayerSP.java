@@ -20,30 +20,18 @@ import org.spongepowered.asm.mixin.Shadow;
 public abstract class MixinEntityPlayerSP extends AbstractClientPlayer {
 
     @Shadow public abstract boolean isSneaking();
-
     @Shadow protected abstract boolean isCurrentViewEntity();
-
     @Shadow @Final public NetHandlerPlayClient sendQueue;
-
     @Shadow private boolean serverSneakState;
-
     @Shadow private boolean serverSprintState;
-
     @Shadow private double lastReportedPosX;
-
     @Shadow private double lastReportedPosY;
-
     @Shadow private double lastReportedPosZ;
-
     @Shadow private float lastReportedYaw;
-
     @Shadow private float lastReportedPitch;
-
     @Shadow private int positionUpdateTicks;
 
     @Shadow public abstract void setSprinting(boolean b);
-
-    private float yaw, pitch;
 
     public MixinEntityPlayerSP(World world, GameProfile gameProfile) {
         super(world, gameProfile);
@@ -55,26 +43,36 @@ public abstract class MixinEntityPlayerSP extends AbstractClientPlayer {
      */
     @Overwrite
     public void onUpdateWalkingPlayer() {
-        this.yaw = Smok.inst.mc.thePlayer.rotationYaw;
-        this.pitch = Smok.inst.mc.thePlayer.rotationPitch;
+        float yaw;
+        float pitch;
+
+        // ------------------------------------------
+
+        yaw = Smok.inst.mc.thePlayer.rotationYaw;
+        pitch = Smok.inst.mc.thePlayer.rotationPitch;
 
         if (Smok.inst.rotManager.isRotating()) {
-            this.yaw = Smok.inst.rotManager.getYaw();
-            this.pitch = Smok.inst.rotManager.getPitch();
+            yaw = Smok.inst.rotManager.getYaw();
+            pitch = Smok.inst.rotManager.getPitch();
 
-            Smok.inst.mc.thePlayer.rotationYawHead = this.yaw;
-            Smok.inst.mc.thePlayer.renderYawOffset = this.yaw;
+            Smok.inst.mc.thePlayer.rotationYawHead = yaw;
+            Smok.inst.mc.thePlayer.renderYawOffset = yaw;
+
+            //Smok.inst.mc.thePlayer.rotationYaw = yaw;
+            //Smok.inst.mc.thePlayer.rotationPitch = pitch;
         }
 
         boolean var1 = this.isSprinting();
 
-        if (Smok.inst.ratManager.getBigRatByClass(Scaffold.class).isToggled() && Scaffold.blockSprint.isToggled()) {
+        if (Smok.inst.ratManager.getBigRatByClass(Scaffold.class).isEnabled() && Scaffold.blockSprint.isEnabled()) {
             KeyBinding.setKeyBindState(Smok.inst.mc.gameSettings.keyBindSprint.getKeyCode(), false);
             this.setSprinting(false);
 
             this.serverSprintState = false;
             var1 = false;
         }
+
+        // ------------------------------------------
 
         if (var1 != this.serverSprintState) {
             if (var1)
@@ -99,23 +97,23 @@ public abstract class MixinEntityPlayerSP extends AbstractClientPlayer {
             double var3 = this.posX - this.lastReportedPosX;
             double var5 = this.getEntityBoundingBox().minY - this.lastReportedPosY;
             double var7 = this.posZ - this.lastReportedPosZ;
-            double var9 = this.yaw - this.lastReportedYaw;
-            double var11 = this.pitch - this.lastReportedPitch;
+            double var9 = yaw - this.lastReportedYaw;
+            double var11 = pitch - this.lastReportedPitch;
 
             boolean var13 = var3 * var3 + var5 * var5 + var7 * var7 > 9.0E-4 || this.positionUpdateTicks >= 20;
             boolean var14 = var9 != 0.0 || var11 != 0.0;
 
             if (this.ridingEntity == null) {
                 if (var13 && var14)
-                    this.sendQueue.addToSendQueue(new C03PacketPlayer.C06PacketPlayerPosLook(this.posX, this.getEntityBoundingBox().minY, this.posZ, this.yaw, this.pitch, this.onGround));
+                    this.sendQueue.addToSendQueue(new C03PacketPlayer.C06PacketPlayerPosLook(this.posX, this.getEntityBoundingBox().minY, this.posZ, yaw, pitch, this.onGround));
                 else if (var13)
                     this.sendQueue.addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(this.posX, this.getEntityBoundingBox().minY, this.posZ, this.onGround));
                 else if (var14)
-                    this.sendQueue.addToSendQueue(new C03PacketPlayer.C05PacketPlayerLook(this.yaw, this.pitch, this.onGround));
+                    this.sendQueue.addToSendQueue(new C03PacketPlayer.C05PacketPlayerLook(yaw, pitch, this.onGround));
                 else
                     this.sendQueue.addToSendQueue(new C03PacketPlayer(this.onGround));
             } else {
-                this.sendQueue.addToSendQueue(new C03PacketPlayer.C06PacketPlayerPosLook(this.motionX, -999, this.motionZ, this.yaw, this.pitch, this.onGround));
+                this.sendQueue.addToSendQueue(new C03PacketPlayer.C06PacketPlayerPosLook(this.motionX, -999, this.motionZ, yaw, pitch, this.onGround));
                 var13 = false;
             }
 
@@ -129,8 +127,8 @@ public abstract class MixinEntityPlayerSP extends AbstractClientPlayer {
             }
 
             if (var14) {
-                this.lastReportedYaw = this.yaw;
-                this.lastReportedPitch = this.pitch;
+                this.lastReportedYaw = yaw;
+                this.lastReportedPitch = pitch;
             }
         }
     }

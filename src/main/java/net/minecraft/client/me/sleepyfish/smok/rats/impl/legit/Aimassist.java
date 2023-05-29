@@ -50,7 +50,7 @@ public class Aimassist extends Rat {
     @SmokEvent
     public void onTick(EventTick e) {
         if (Utils.canLegitWork()) {
-            if (weaponOnly.isToggled())
+            if (weaponOnly.isEnabled())
                 if (!Utils.holdingWeapon())
                     return;
 
@@ -58,10 +58,10 @@ public class Aimassist extends Rat {
             if (target != null) {
                 double n = Utils.Combat.fovFromEntity(target);
 
-                if (aimlock.isToggled()) {
+                if (aimlock.isEnabled()) {
                     float[] rot = Utils.Combat.getTargetRotations(target);
 
-                    if (aimlockSilent.isToggled()) {
+                    if (aimlockSilent.isEnabled()) {
                         mc.thePlayer.cameraYaw = rot[0];
                         mc.thePlayer.cameraPitch = rot[1];
 
@@ -113,9 +113,9 @@ public class Aimassist extends Rat {
                             } while (target.isDead);
                         } while (target.isInvisible());
                     } while (mc.thePlayer.isOnSameTeam(target));
-                } while (ignoreFriends.isToggled() && FriendUtils.isFriend(target));
+                } while (ignoreFriends.isEnabled() && FriendUtils.isFriend(target));
             } while (!Utils.Combat.inRange(target, range.getValue()));
-        } while (!aimlock.isToggled() && !Utils.Combat.isInFov(target, (float) fov.getValue()));
+        } while (!aimlock.isEnabled() && !Utils.Combat.isInFov(target, (float) fov.getValue()));
 
         return target;
     }

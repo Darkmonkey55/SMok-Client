@@ -34,11 +34,11 @@ public class Spin extends Rat {
 
     @SmokEvent
     public void onTick(EventTick e) {
-        if (serverSided.isToggled()) {
-            if (!Gui.blatantMode.isToggled()) {
+        if (serverSided.isEnabled()) {
+            if (!Gui.blatantMode.isEnabled()) {
                 serverSided.toggle();
 
-                if (Gui.moduleNotify.isToggled())
+                if (Gui.moduleNotify.isEnabled())
                     ClientUtils.notify(Var.spin_name, "U cant enable this setting without blatant mode", Notification.Icon.Info, 3);
             }
 
@@ -47,7 +47,7 @@ public class Spin extends Rat {
         } else {
             Smok.inst.rotManager.setRotating(false);
 
-            if (reversedHead.isToggled())
+            if (reversedHead.isEnabled())
                 mc.thePlayer.rotationYawHead = -this.yaw;
             else
                 mc.thePlayer.rotationYawHead = this.yaw;
@@ -62,7 +62,7 @@ public class Spin extends Rat {
     public void onEnableEvent() {
         this.yaw = 0;
 
-        if (!serverSided.isToggled())
+        if (!serverSided.isEnabled())
             Smok.inst.rotManager.setRotating(false);
     }
 
@@ -70,7 +70,7 @@ public class Spin extends Rat {
     public void onDisableEvent() {
         this.yaw = 0;
 
-        if (!serverSided.isToggled())
+        if (!serverSided.isEnabled())
             Smok.inst.rotManager.setRotating(false);
     }
 

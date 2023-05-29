@@ -5,17 +5,17 @@ import java.awt.Color;
 // Class from SMok Client by SleepyFish
 public class AccentColor {
 
-	private final String name;
+	private final int id;
 	private final Color color1, color2;
 
-	public AccentColor(String name, Color color1, Color color2) {
-		this.name = name;
+	public AccentColor(int id, Color color1, Color color2) {
+		this.id = id;
 		this.color1 = color1;
 		this.color2 = color2;
 	}
 	
-	public String getName() {
-		return name;
+	public int getID() {
+		return id;
 	}
 
 	public Color getColor1() {

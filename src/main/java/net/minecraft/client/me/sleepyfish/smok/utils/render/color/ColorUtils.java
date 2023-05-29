@@ -67,7 +67,7 @@ public class ColorUtils {
 
 	private static Color getRawBackgroundColor(int id) {
 		Color color = new Color(255, 0, 0);
-		boolean dark = Gui.darkMode.isToggled();
+		boolean dark = Gui.darkMode.isEnabled();
 
 		if (!isGooberDate()) {
 			switch (id) {
@@ -133,7 +133,7 @@ public class ColorUtils {
 
 	private static Color getRawFontColor(int id) {
 		Color color = new Color(0, 0, 255);
-		boolean dark = Gui.darkMode.isToggled();
+		boolean dark = Gui.darkMode.isEnabled();
 
 		if (!isGooberDate()) {
 			switch (id) {
@@ -161,8 +161,8 @@ public class ColorUtils {
 	}
 
 	public static Color getClientColor(int index, int alpha) {
-		for (AccentColor c : Smok.inst.colManager.skom())
-			if (c.equals(Smok.inst.colManager.mOks()))
+		for (AccentColor c : Smok.inst.colManager.getColorModes())
+			if (c.equals(Smok.inst.colManager.getColorMode()))
 				return ColorUtils.interpolateColorsBackAndForth(15, index, new Color(c.getColor1().getRed(), c.getColor1().getGreen(), c.getColor1().getBlue(), alpha), new Color(c.getColor2().getRed(), c.getColor2().getGreen(), c.getColor2().getBlue(), alpha), false);
 
 		return ColorUtils.interpolateColorsBackAndForth(15, index, new Color(234, 107, 149, alpha), new Color(238, 164, 123, alpha), false);
@@ -192,15 +192,15 @@ public class ColorUtils {
 		return new Color(resultColor.getRed(), resultColor.getGreen(), resultColor.getBlue(), MathUtils.interpolateInt(color1.getAlpha(), color2.getAlpha(), amount));
 	}
 
-	public static void setColor(int color, float alpha) {
-		float r = (float) (color >> 16 & 255) / 255.0F;
-		float g = (float) (color >> 8 & 255) / 255.0F;
-		float b = (float) (color & 255) / 255.0F;
+	public static void setColor(Color color, float alpha) {
+		float r = (float) (color.getRGB() >> 16 & 255) / 255.0F;
+		float g = (float) (color.getRGB() >> 8 & 255) / 255.0F;
+		float b = (float) (color.getRGB() & 255) / 255.0F;
 		GlStateManager.color(r, g, b, alpha);
 	}
 
-	public static void setColor(int color) {
-		setColor(color, (float) (color >> 24 & 255) / 255.0F);
+	public static void setColor(Color color) {
+		setColor(color, (float) (color.getRGB() >> 24 & 255) / 255.0F);
 	}
 
 	public static void clearColor() {

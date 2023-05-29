@@ -4,13 +4,12 @@
   "mixins": [
     "RendererLivingEntityMixin",
     "custom.MixinEntityPlayerSP",
-    "custom.MixinEntityRenderer",
     "custom.MixinGuiIngame",
     "custom.MixinGuiScreen",
     "custom.MixinItemRenderer",
     "custom.MixinMinecraft",
+    "custom.MixinMovingObjectPosition",
     "custom.MixinNetworkManager",
-    "custom.MixinRenderManager",
-    "custom.MixinWorldRenderer"
+    "custom.MixinRenderManager"
   ]
 }

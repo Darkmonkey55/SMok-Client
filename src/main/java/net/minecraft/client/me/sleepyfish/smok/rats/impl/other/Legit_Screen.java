@@ -11,32 +11,32 @@ import net.minecraft.client.me.sleepyfish.smok.rats.impl.useless.Spin;
 import net.minecraft.client.me.sleepyfish.smok.rats.impl.visual.*;
 
 // Class from SMok Client by SleepyFish
-public class Legit_Mode extends Rat {
+public class Legit_Screen extends Rat {
 
     private boolean[] enabled = {};
 
-    public Legit_Mode() {
+    public Legit_Screen() {
         super(Var.legit_screen_name, Category.Other, Var.legit_screen_desc);
     }
 
     @Override
     public void onEnableEvent() {
         this.enabled = new boolean[] {
-                Smok.inst.ratManager.getBigRatByClass(Aura.class).isToggled(),
-                Smok.inst.ratManager.getBigRatByClass(Aura.class).isToggled() && Aura.esp.isToggled(),
-                Smok.inst.ratManager.getBigRatByClass(Chams.class).isToggled(),
-                Smok.inst.ratManager.getBigRatByClass(Target_Hud.class).isToggled(),
-                Smok.inst.ratManager.getBigRatByClass(Esp.class).isToggled(),
-                Smok.inst.ratManager.getBigRatByClass(No_Background.class).isToggled(),
-                Smok.inst.ratManager.getBigRatByClass(Text_Gui.class).isToggled(),
-                Smok.inst.ratManager.getBigRatByClass(Auto_Chat.class).isToggled(),
-                Smok.inst.ratManager.getBigRatByClass(Spin.class).isToggled(),
-                Smok.inst.ratManager.getBigRatByClass(Add_Friends.class).isToggled(),
-                Smok.inst.ratManager.getBigRatByClass(Detector.class).isToggled(),
-                Smok.inst.ratManager.getBigRatByClass(Blink.class).isToggled(),
-                Smok.inst.ratManager.getBigRatByClass(Bunny_Hop.class).isToggled(),
-                Smok.inst.ratManager.getBigRatByClass(Scaffold.class).isToggled(),
-                Gui.blatantMode.isToggled()
+                Smok.inst.ratManager.getBigRatByClass(Aura.class).isEnabled(),
+                Smok.inst.ratManager.getBigRatByClass(Aura.class).isEnabled() && Aura.esp.isEnabled(),
+                Smok.inst.ratManager.getBigRatByClass(Chams.class).isEnabled(),
+                Smok.inst.ratManager.getBigRatByClass(Target_Hud.class).isEnabled(),
+                Smok.inst.ratManager.getBigRatByClass(Esp.class).isEnabled(),
+                Smok.inst.ratManager.getBigRatByClass(No_Background.class).isEnabled(),
+                Smok.inst.ratManager.getBigRatByClass(Text_Gui.class).isEnabled(),
+                Smok.inst.ratManager.getBigRatByClass(Auto_Chat.class).isEnabled(),
+                Smok.inst.ratManager.getBigRatByClass(Spin.class).isEnabled(),
+                Smok.inst.ratManager.getBigRatByClass(Add_Friends.class).isEnabled(),
+                Smok.inst.ratManager.getBigRatByClass(Detector.class).isEnabled(),
+                Smok.inst.ratManager.getBigRatByClass(Blink.class).isEnabled(),
+                Smok.inst.ratManager.getBigRatByClass(Bunny_Hop.class).isEnabled(),
+                Smok.inst.ratManager.getBigRatByClass(Scaffold.class).isEnabled(),
+                Gui.blatantMode.isEnabled()
         };
 
         if (enabled[0])

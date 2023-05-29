@@ -1,5 +1,6 @@
 package net.minecraft.client.club.maxstats.weaveyoutube.mixin.custom;
 
+import net.minecraft.client.me.sleepyfish.smok.Smok;
 import net.minecraft.client.me.sleepyfish.smok.rats.impl.visual.No_Background;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.Minecraft;
@@ -18,19 +19,19 @@ public abstract class MixinGuiScreen {
 
     @Shadow public int height;
 
-    @Shadow public abstract void drawBackground(int smok);
+    @Shadow public abstract void drawBackground(int tint);
 
     /**
      * @author sleepy
      * @reason no background
      */
     @Overwrite
-    public void drawWorldBackground(int Smok) {
+    public void drawWorldBackground(int tint) {
         if (this.mc.theWorld != null) {
-            int smok = (net.minecraft.client.me.sleepyfish.smok.Smok.inst.ratManager.getBigRatByClass(No_Background.class).isToggled()) ? 0 : -1072689136;
+            int smok = (Smok.inst.ratManager.getBigRatByClass(No_Background.class).isEnabled()) ? 0 : -1072689136;
             Gui.drawRect(0, 0, this.width, this.height, smok);
         } else
-            this.drawBackground(Smok);
+            this.drawBackground(tint);
     }
 
 }

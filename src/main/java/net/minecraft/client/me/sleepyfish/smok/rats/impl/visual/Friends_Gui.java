@@ -2,6 +2,7 @@ package net.minecraft.client.me.sleepyfish.smok.rats.impl.visual;
 
 import net.minecraft.client.me.sleepyfish.smok.Smok;
 import net.minecraft.client.me.sleepyfish.smok.rats.Rat;
+import net.minecraft.client.me.sleepyfish.smok.utils.ClientUtils;
 
 // Class from SMok Client by SleepyFish
 public class Friends_Gui extends Rat {
@@ -12,7 +13,7 @@ public class Friends_Gui extends Rat {
 
     @Override
     public void setup() {
-        this.setKeycode(Smok.inst.getBind(3));
+        this.setBind(ClientUtils.getBind(3));
     }
 
     @Override

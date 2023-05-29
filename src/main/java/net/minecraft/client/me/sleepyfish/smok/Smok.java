@@ -9,7 +9,6 @@ import net.minecraft.client.me.sleepyfish.smok.rats.event.EventManager;
 import net.minecraft.client.me.sleepyfish.smok.utils.font.FontUtils;
 import net.minecraft.client.me.sleepyfish.smok.utils.render.color.ColorManager;
 import net.minecraft.client.Minecraft;
-import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 
 // Class from SMok Client by SleepyFish
@@ -47,20 +46,6 @@ public class Smok {
         rotManager = new RotateUtils();
 
         FontUtils.init();
-    }
-
-    // Goofy code
-    public int getBind(int gui) {
-        if (gui == 1)
-            return Keyboard.KEY_DELETE;
-
-        if (gui == 1 + 1)
-            return Keyboard.KEY_RSHIFT;
-
-        if (gui == 1 + 1 + 1)
-            return Keyboard.KEY_BACK;
-
-        return 0;
     }
 
     public void saveAndSetTitle() {

@@ -10,7 +10,7 @@ import net.minecraft.client.network.NetworkPlayerInfo;
 public class TargetUtils {
 
     private static final Minecraft mc = Minecraft.getMinecraft();
-    private static final Notification.Timer timer = new Notification.Timer();
+    private static final Timer.Better timer = new Timer.Better();
     private static Entity target;
 
     public static void onUpdate() {

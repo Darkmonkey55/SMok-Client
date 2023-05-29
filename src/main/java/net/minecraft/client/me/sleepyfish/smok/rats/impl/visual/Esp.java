@@ -10,6 +10,7 @@ public class Esp extends Rat {
     public static BoolSetting showHealth;
     public static ModeSetting<Enum<?>> mode;
 
+    // Mixin module
     public Esp() {
         super(Var.esp_name, Category.Visual, Var.esp_desc);
     }

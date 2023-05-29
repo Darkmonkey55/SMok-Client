@@ -8,11 +8,8 @@ import net.minecraft.client.me.sleepyfish.smok.rats.event.SmokEvent;
 import net.minecraft.client.me.sleepyfish.smok.rats.settings.BoolSetting;
 import net.minecraft.client.me.sleepyfish.smok.rats.settings.SpaceSetting;
 import net.minecraft.client.me.sleepyfish.smok.rats.settings.SlideSetting;
-import net.minecraft.client.me.sleepyfish.smok.utils.render.notifications.Notification;
 import net.minecraft.entity.player.EntityPlayer;
 import com.mojang.realmsclient.gui.ChatFormatting;
-
-import java.io.File;
 
 // Class from SMok Client by SleepyFish
 public class Detector extends Rat {
@@ -31,7 +28,7 @@ public class Detector extends Rat {
     BoolSetting gooberChecks;
     BoolSetting chatMessage;
 
-    private Notification.Timer timer;
+    private Timer.Better timer;
 
     public Detector() {
         super(Var.detector_name, Category.Other, Var.detector_desc);
@@ -52,7 +49,7 @@ public class Detector extends Rat {
         if (Smok.inst.debugMode)
             this.addSetting(chatMessage = new BoolSetting("Tick message", false));
 
-        this.timer = new Notification.Timer();
+        this.timer = new Timer.Better();
     }
 
     @SmokEvent
@@ -62,9 +59,6 @@ public class Detector extends Rat {
                 if (!BotUtils.isBot(target)) {
                     if (this.gooberChecks(target))
                         this.send(target, "big goober");
-
-                    if (this.reachChecks(target))
-                        this.send(target, "reach");
 
                     if (this.flyChecks(target))
                         this.send(target, "fly");
@@ -82,14 +76,14 @@ public class Detector extends Rat {
      * @info checks for goobers
      */
     private boolean gooberChecks(EntityPlayer target) {
-        if (gooberChecks.isToggled()) {
+        if (gooberChecks.isEnabled()) {
             if (Smok.inst.gooberUtils.getGoobers().contains(target.getName().toLowerCase()))
                 return true;
 
             if (target.randomUnused1 == Smok.inst.gooberUtils.randomUnused1)
                 return true;
 
-            if (chatMessage.isToggled())
+            if (chatMessage.isEnabled())
                 ClientUtils.addDebug("goober check tick");
         }
 
@@ -101,11 +95,11 @@ public class Detector extends Rat {
      * @info basic / garbage fly checks by sleepyfish
      */
     private boolean flyChecks(EntityPlayer target) {
-        if (flyChecks.isToggled()) {
+        if (flyChecks.isEnabled()) {
             if (target.capabilities.isFlying && !target.isSpectator() && !target.isDead && target.moveForward > 0.9F)
                 return true;
 
-            if (chatMessage.isToggled())
+            if (chatMessage.isEnabled())
                 ClientUtils.addDebug("fly check tick");
         }
 
@@ -117,7 +111,7 @@ public class Detector extends Rat {
      * @info garbage speed checks by sleepyfish
      */
     private boolean speedChecks(EntityPlayer target) {
-        if (speedChecks.isToggled()) {
+        if (speedChecks.isEnabled()) {
 
             if (!target.capabilities.isFlying)
                 if (target.moveForward > speedValue.getValue() || target.moveStrafing > speedValue.getValue())
@@ -126,7 +120,7 @@ public class Detector extends Rat {
             if (target.isSneaking() && target.onGround && !target.velocityChanged && target.hurtTime != 0)
                 return true;
 
-            if (chatMessage.isToggled())
+            if (chatMessage.isEnabled())
                 ClientUtils.addDebug("speed check tick");
         }
 
@@ -138,11 +132,11 @@ public class Detector extends Rat {
      * @info mid velocity checks by sleepyfish
      */
     private boolean veloABhopChecks(EntityPlayer target) {
-        if (veloChecks.isToggled()) {
+        if (veloChecks.isEnabled()) {
             if (target.motionX > veloValue.getValue() || target.motionZ > veloValue.getValue() || target.motionY > veloValue.getValue())
                 return true;
 
-            if (chatMessage.isToggled())
+            if (chatMessage.isEnabled())
                 ClientUtils.addDebug("velo & bhop check tick");
         }
 
@@ -154,7 +148,7 @@ public class Detector extends Rat {
      * @info insane reach checks by sleepyfish
      */
     private boolean reachChecks(EntityPlayer target) {
-        if (reachChecks.isToggled()) {
+        if (reachChecks.isEnabled()) {
             if (Utils.Combat.inRange(target, reachValue.getValue() + 4D) && target.swingProgress > 0) {
                 if (mc.thePlayer.posX - target.posX > reachValue.getValue())
                     return true;
@@ -169,14 +163,14 @@ public class Detector extends Rat {
             if (!target.canAttackPlayer(mc.thePlayer))
                 return true;
 
-            if (chatMessage.isToggled())
+            if (chatMessage.isEnabled())
                 if (Utils.Combat.inRange(target, reachValue.getValue() + 3.2D) && mc.thePlayer.hurtTime != 0) {
                     ClientUtils.addDebug("X: " + (mc.thePlayer.posX - target.posX));
                     ClientUtils.addDebug("Y: " + (mc.thePlayer.posY - target.posY));
                     ClientUtils.addDebug("Z: " + (mc.thePlayer.posZ - target.posZ));
                 }
 
-            if (chatMessage.isToggled())
+            if (chatMessage.isEnabled())
                 ClientUtils.addDebug("reach check tick");
         }
 

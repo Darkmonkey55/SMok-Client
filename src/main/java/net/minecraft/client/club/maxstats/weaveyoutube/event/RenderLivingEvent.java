@@ -1,8 +1,8 @@
 package net.minecraft.client.club.maxstats.weaveyoutube.event;
 
-import club.maxstats.weave.loader.api.event.Event;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.client.renderer.entity.RendererLivingEntity;
+import net.weavemc.loader.api.event.Event;
 
 // Class from SMok Client by SleepyFish
 public class RenderLivingEvent extends Event {

@@ -47,8 +47,8 @@ public class ModeComp implements IComp {
         GL11.glScaled(0.5D, 0.5D, 0.5D);
 
         int modeWidth = (int) (FontUtils.r24.getStringWidth(this.mode.getSettingName() + ": ") * 0.5);
-        FontUtils.r24.drawString(this.mode.getSettingName() + ": ", (float) ((this.module.getCategory().getX() + 4) * 2), (float) ((this.module.getCategory().getY() + this.o + 4) * 2), ColorUtils.getFontColor(1).darker().darker().getRGB());
-        FontUtils.r24.drawString(String.valueOf(this.mode.getMode()), (float) ((this.module.getCategory().getX() + modeWidth + 4) * 2), (float) ((this.module.getCategory().getY() + this.o + 4) * 2), ColorUtils.getFontColor(1).darker().getRGB());
+        FontUtils.r24.drawString(this.mode.getSettingName() + ": ", (float) ((this.module.getCategory().getX() + 4) * 2), (float) ((this.module.getCategory().getY() + this.o + 4) * 2), ColorUtils.getFontColor(1).darker().darker());
+        FontUtils.r24.drawString(String.valueOf(this.mode.getMode()), (float) ((this.module.getCategory().getX() + modeWidth + 4) * 2), (float) ((this.module.getCategory().getY() + this.o + 4) * 2), ColorUtils.getFontColor(1).darker());
 
         GL11.glPopMatrix();
     }

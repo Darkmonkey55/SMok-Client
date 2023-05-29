@@ -7,7 +7,8 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.texture.DynamicTexture;
-import java.awt.Font;
+
+import java.awt.*;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import org.lwjgl.opengl.GL11;
@@ -27,12 +28,12 @@ public class MinecraftFontRenderer extends CFont {
         this.setupBoldItalicIDs();
     }
 
-    public int drawStringWithShadow(String text, double x2, double y2, int color) {
+    public int drawStringWithShadow(String text, double x2, double y2, Color color) {
         float shadowWidth = this.drawString(text, x2 + 0.5f, y2 + 0.5f, color, true, 8.3f, false);
         return (int) Math.max(shadowWidth, this.drawString(text, x2, y2, color, false, 8.3f, false));
     }
 
-    public int drawString(String text, double x, double y, int color) {
+    public int drawString(String text, double x, double y, Color color) {
         return (int) this.drawString(text, x, y, color, false, 8.3f, false);
     }
 
@@ -49,14 +50,14 @@ public class MinecraftFontRenderer extends CFont {
 
             if (!hasReachedSS) {
                 if (shadow)
-                    this.drawStringWithShadow(tmp, xTmp, y, ColorUtils.getClientColor(i, opacity).getRGB());
+                    this.drawStringWithShadow(tmp, xTmp, y, ColorUtils.getClientColor(i, opacity));
                 else
-                    this.drawString(tmp, xTmp, y, ColorUtils.getClientColor(i, opacity).getRGB());
+                    this.drawString(tmp, xTmp, y, ColorUtils.getClientColor(i, opacity));
 
                 xTmp += this.getStringWidth(String.valueOf(textChar));
                 text = text.substring(1);
             } else if (!hasFinished) {
-                this.drawString(text, xTmp, y, -1);
+                this.drawString(text, xTmp, y, Color.black);
                 hasFinished = true;
             }
 
@@ -72,37 +73,39 @@ public class MinecraftFontRenderer extends CFont {
         this.drawStringWithClientColor(text, x, y, opacity, shadow);
     }
 
-    public int drawPassword(String text, double x2, float y2, int color) {
+    public int drawPassword(String text, double x2, float y2, Color color) {
         return (int) this.drawString(text.replaceAll("\\.", "."), x2, y2, color, false, 8f, false);
     }
 
-    public float drawCenteredString(String text, float x2, float y2, int color) {
+    public float drawCenteredString(String text, float x2, float y2, Color color) {
         return this.drawString(text, x2 - (float) (this.getStringWidth(text) / 2), y2, color);
     }
 
-    public void drawCenteredStringWithShadow(String text, float x2, float y2, int color) {
+    public void drawCenteredStringWithShadow(String text, float x2, float y2, Color color) {
         this.drawStringWithShadow(text, x2 - (float) (this.getStringWidth(text) / 2), y2, color);
     }
 
-    public float drawString(String text, double x, double y, int color, boolean shadow, float kerning, boolean smooth) {
+    public float drawString(String text, double x, double y, Color color, boolean shadow, float kerning, boolean smooth) {
         ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
 
         if (text == null)
             return 0;
 
+        int co = color.getRGB();
+
         if (shadow)
-            color = (color & 0xFCFCFC) >> 2 | color & 0xFF000000;
+            co = (color.getRGB() & 0xFCFCFC) >> 2 | color.getRGB() & 0xFF000000;
 
         FontUtils.init();
         CharData[] currentData = this.charData;
-        float alpha = (float) (color >> 24 & 255) / 255f;
+        float alpha = (float) (co >> 24 & 255) / 255f;
         x = (x - 1) * (double) sr.getScaleFactor();
         y = (y - 3) * (float) sr.getScaleFactor() - 0.2;
         GL11.glPushMatrix();
         GL11.glScaled(1 / (double) sr.getScaleFactor(), 1 / (double) sr.getScaleFactor(), 1 / (double) sr.getScaleFactor());
         GlStateManager.enableBlend();
         GlStateManager.blendFunc(770, 771);
-        ColorUtils.setColor(color);
+        ColorUtils.setColor(new Color(co));
         GlStateManager.enableTexture2D();
         GlStateManager.bindTexture(this.tex.getGlTextureId());
         GlUtils.bindTexture(this.tex.getGlTextureId());
@@ -129,7 +132,7 @@ public class MinecraftFontRenderer extends CFont {
                     if (shadow)
                         colorIndex += 16;
 
-                    ColorUtils.setColor(this.colorCode[colorIndex], alpha);
+                    ColorUtils.setColor(new Color(this.colorCode[colorIndex]), alpha);
                 } else {
                     ColorUtils.setColor(color);
                     GlStateManager.bindTexture(this.tex.getGlTextureId());

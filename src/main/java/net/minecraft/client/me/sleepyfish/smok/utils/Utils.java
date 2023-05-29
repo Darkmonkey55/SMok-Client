@@ -1,19 +1,18 @@
 package net.minecraft.client.me.sleepyfish.smok.utils;
 
 import net.minecraft.client.me.sleepyfish.smok.Smok;
-import net.minecraft.block.Block;
-import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.*;
-import net.minecraft.network.play.client.C08PacketPlayerBlockPlacement;
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.entity.EntityOtherPlayerMP;
+import net.minecraft.network.play.client.C08PacketPlayerBlockPlacement;
 import org.lwjgl.input.Mouse;
 
 // Class from SMok Client by SleepyFish
@@ -95,6 +94,22 @@ public class Utils {
         Smok.inst.mc.playerController.windowClick(Smok.inst.mc.thePlayer.inventoryContainer.windowId, from, to, 2, Smok.inst.mc.thePlayer);
     }
 
+    public static void changeToBlock() {
+        for (int i = 0; i < 9; i++) {
+            ItemStack s = Smok.inst.mc.thePlayer.inventory.getStackInSlot(i);
+            if (s != null && s.getItem() instanceof ItemBlock) {
+                boolean b = s.getItem() instanceof ItemAnvilBlock;
+                String n = s.getDisplayName().toLowerCase();
+
+                if (b || n.equals("sand") || n.equals("red sand") || n.equals("anvil") || n.endsWith("slab") ||
+                        n.startsWith("lilly") || n.startsWith("sapling") || n.startsWith("chest") || n.contains("web"))
+                    return;
+
+                Smok.inst.mc.thePlayer.inventory.currentItem = i;
+            }
+        }
+    }
+
     public static class Npc {
 
         private static EntityOtherPlayerMP npc;
@@ -111,6 +126,7 @@ public class Utils {
                 npc.setSprinting(Smok.inst.mc.thePlayer.isSprinting());
                 npc.setSneaking(Smok.inst.mc.thePlayer.isSneaking());
                 npc.setInvisible(Smok.inst.mc.thePlayer.isInvisible());
+                ClientUtils.addDebug("Spawned npc: " + npc.getName());
                 Smok.inst.mc.theWorld.addEntityToWorld(npc.getEntityId(), npc);
             }
         }
@@ -118,6 +134,7 @@ public class Utils {
         public static void kill() {
             if (npc != null) {
                 Smok.inst.mc.theWorld.removeEntityFromWorld(npc.getEntityId());
+                ClientUtils.addDebug("Killed npc: " + npc.getName());
                 npc = null;
             }
         }

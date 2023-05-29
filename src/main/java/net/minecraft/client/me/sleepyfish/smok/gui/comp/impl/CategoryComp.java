@@ -65,25 +65,25 @@ public class CategoryComp {
          RoundedUtils.drawRoundOutline(getX(), getY(), getWidth(), getHeight() + catBGOff, 1F, 2.62F, ColorUtils.getBackgroundColor(5), ColorUtils.getBackgroundColor(5).darker());
 
       if (category == Rat.Category.Other)
-         FontUtils.i20.drawString("r", getX() + 2, getY() + 3, ColorUtils.getFontColor(1).getRGB());
+         FontUtils.i20.drawString("r", getX() + 2, getY() + 3, ColorUtils.getFontColor(1));
 
       if (category == Rat.Category.Visual)
-         FontUtils.i20.drawString("i", getX() + 2, getY() + 3, ColorUtils.getFontColor(1).getRGB());
+         FontUtils.i20.drawString("i", getX() + 2, getY() + 3, ColorUtils.getFontColor(1));
 
       if (category == Rat.Category.Legit)
-         FontUtils.i20.drawString(";", getX() + 2, getY() + 3, ColorUtils.getFontColor(1).getRGB());
+         FontUtils.i20.drawString(";", getX() + 2, getY() + 3, ColorUtils.getFontColor(1));
 
       if (category == Rat.Category.Blatant)
-         FontUtils.i20.drawString("A", getX() + 2, getY() + 3, ColorUtils.getFontColor(1).getRGB());
+         FontUtils.i20.drawString("A", getX() + 2, getY() + 3, ColorUtils.getFontColor(1));
 
       if (category == Rat.Category.Useless)
-         FontUtils.i20.drawString("6", getX() + 2, getY() + 3, ColorUtils.getFontColor(1).getRGB());
+         FontUtils.i20.drawString("6", getX() + 2, getY() + 3, ColorUtils.getFontColor(1));
 
       // category name
-      FontUtils.r20.drawStringWithClientColor(this.category.getName(), getX() + catBGOff + 12, getY() + catBGOff, true);
+      FontUtils.r20.drawStringWithClientColor(this.category.getName(), getX() + catBGOff + 14, getY() + catBGOff, true);
 
       if (!this.n4m) {
-         FontUtils.i28.drawString(this.categoryOpened ? "J" : "K", (int) (getX() + marginX + 14), getY() + 1.3F, ColorUtils.getFontColor(1).getRGB());
+         FontUtils.i28.drawString(this.categoryOpened ? "J" : "K", (int) (getX() + marginX + 14), getY() + 1.3F, ColorUtils.getFontColor(1));
 
          if (this.categoryOpened && !this.ratInCategory.isEmpty())
             for (IComp c : this.ratInCategory)

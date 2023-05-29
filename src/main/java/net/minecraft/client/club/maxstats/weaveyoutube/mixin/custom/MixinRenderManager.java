@@ -20,7 +20,7 @@ public abstract class MixinRenderManager {
     public void doRenderEntity(Entity target, double x, double y, double z, float entityYaw, float partialTicks, boolean hideDebugBox, CallbackInfoReturnable<Boolean> cir) {
         if (target instanceof EntityPlayer)
             if (!Utils.inInv())
-                if (Smok.inst.ratManager.getBigRatByClass(Chams.class).isToggled()) {
+                if (Smok.inst.ratManager.getBigRatByClass(Chams.class).isEnabled()) {
                     GL11.glEnable(32823);
                     GL11.glPolygonOffset(0F, -1100000.0F);
                 } else {

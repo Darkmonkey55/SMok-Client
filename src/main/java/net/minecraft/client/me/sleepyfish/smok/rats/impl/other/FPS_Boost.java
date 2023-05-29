@@ -5,8 +5,7 @@ import net.minecraft.client.me.sleepyfish.smok.rats.Rat;
 // Class from SMok Client by SleepyFish
 public class FPS_Boost extends Rat {
 
-    // this is a big fps booster if u cant tell (ong)
-
+    // Mixin module
     public FPS_Boost() {
         super(Var.fpsBoost_name, Category.Other, Var.fpsBoost_Desc);
     }

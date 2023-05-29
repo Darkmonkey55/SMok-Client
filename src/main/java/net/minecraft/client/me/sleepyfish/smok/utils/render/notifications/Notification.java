@@ -2,6 +2,7 @@ package net.minecraft.client.me.sleepyfish.smok.utils.render.notifications;
 
 import net.minecraft.client.me.sleepyfish.smok.Smok;
 import net.minecraft.client.me.sleepyfish.smok.utils.ClientUtils;
+import net.minecraft.client.me.sleepyfish.smok.utils.Timer;
 import net.minecraft.client.me.sleepyfish.smok.utils.font.FontUtils;
 import net.minecraft.client.me.sleepyfish.smok.utils.render.RoundedUtils;
 import net.minecraft.client.me.sleepyfish.smok.utils.render.color.ColorUtils;
@@ -13,7 +14,7 @@ import net.minecraft.client.gui.ScaledResolution;
 // Class from SMok Client by SleepyFish
 public class Notification {
 
-    private final Timer timer = new Timer();
+    private final Timer.Better timer = new Timer.Better();
     private Animation animation;
     private Animation slideAnimation;
 
@@ -87,9 +88,9 @@ public class Notification {
         RoundedUtils.drawGradientRoundLR((float) (sr.getScaledWidth() - animation.getValue()), heightOff, (float) (width + 13), 30, 2, ColorUtils.getBackgroundColor(5), ColorUtils.getBackgroundColor(5).darker());
         RoundedUtils.drawGradientRoundLR((float) (sr.getScaledWidth() - animation.getValue()), heightOff + 28, (float) (slideAnimation.getValue()), 2, 1, ColorUtils.getClientColor(1), ColorUtils.getClientColor(9696));
 
-        FontUtils.i20.drawString(icon, (int) (sr.getScaledWidth() - animation.getValue() + 5), heightOff + 7, ColorUtils.getFontColor(2).getRGB());
-        FontUtils.r20.drawString(title, sr.getScaledWidth() - animation.getValue() + 18, heightOff + 6, ColorUtils.getFontColor(2).getRGB());
-        FontUtils.r20.drawString(message, sr.getScaledWidth() - animation.getValue() + 6, heightOff + 16, ColorUtils.getFontColor(2).getRGB());
+        FontUtils.i20.drawString(icon, (int) (sr.getScaledWidth() - animation.getValue() + 5), heightOff + 7, ColorUtils.getFontColor(2));
+        FontUtils.r20.drawString(title, sr.getScaledWidth() - animation.getValue() + 18, heightOff + 6, ColorUtils.getFontColor(2));
+        FontUtils.r20.drawString(message, sr.getScaledWidth() - animation.getValue() + 6, heightOff + 16, ColorUtils.getFontColor(2));
     }
 
     /*
@@ -103,24 +104,6 @@ public class Notification {
 
     public enum Icon {
         Info, Bell, Warning, Check, Refresh, No;
-    }
-
-    public static class Timer {
-
-        private long lastMs;
-
-        public Timer() {
-            this.lastMs = 0L;
-        }
-
-        public boolean delay(long nextDelay) {
-            return System.currentTimeMillis() - lastMs >= nextDelay;
-        }
-
-        public void reset() {
-            this.lastMs = System.currentTimeMillis();
-        }
-
     }
 
 }

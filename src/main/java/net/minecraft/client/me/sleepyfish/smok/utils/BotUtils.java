@@ -8,7 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 public class BotUtils {
 
     public static boolean isBot(Entity target) {
-        return target.getUniqueID().version() == 2 && target.ticksExisted > 9999 || target.getName().contains("-") || Smok.inst.mc.thePlayer.isInvisibleToPlayer((EntityPlayer) target);
+        return target.getUniqueID().version() == 2 && target.ticksExisted > 9999 || target.getName().contains("-") || target.getName().length() <= 3 || target.getName().contains("_") || Smok.inst.mc.thePlayer.isInvisibleToPlayer((EntityPlayer) target);
     }
 
 }
