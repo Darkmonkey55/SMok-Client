@@ -2,7 +2,6 @@ package net.minecraft.client.club.maxstats.weaveyoutube;
 
 import net.minecraft.client.club.maxstats.weaveyoutube.listener.TickListener;
 import net.minecraft.client.club.maxstats.weaveyoutube.listener.RenderListener;
-import net.minecraft.client.club.maxstats.weaveyoutube.listener.RenderGameOverlayListener;
 import net.minecraft.client.me.sleepyfish.smok.Smok;
 import net.minecraft.client.me.sleepyfish.smok.rats.Rat;
 import net.minecraft.client.me.sleepyfish.smok.utils.ClientUtils;
@@ -35,7 +34,6 @@ public class Main implements ModInitializer {
 
         EventBus.subscribe(new RenderListener());
         EventBus.subscribe(new TickListener());
-        EventBus.subscribe(new RenderGameOverlayListener());
     }
 
 }
