@@ -1,8 +1,8 @@
 {
   "mixinConfigs": [
-    "weaveyoutube.mixins.json"
+    "smok.mixins.json"
   ],
   "entrypoints": [
-    "net.minecraft.client.club.maxstats.weaveyoutube.Main"
+    "maxstats.weave.Entrypoint"
   ]
 }

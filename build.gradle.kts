@@ -1,21 +1,19 @@
-// Class from SMok Client by SleepyFish
 plugins {
-    id("java")
-    id("com.github.weave-mc.weave") version "8b70bcc707"
+    java
+    id("com.github.weave-mc.weave-gradle") version "649dba7468"
 }
 
-group = "club.maxstats.weaveyoutube"
+group = "maxstats.weave"
 version = "v1"
+
+minecraft.version("1.8.9")
 
 repositories {
     maven("https://jitpack.io")
     maven("https://repo.spongepowered.org/maven/")
-    mavenCentral()
 }
 
 dependencies {
     compileOnly("com.github.weave-mc:weave-loader:70bd82faa6")
     compileOnly("org.spongepowered:mixin:0.8.5")
 }
-
-minecraft.version("1.8.9")
